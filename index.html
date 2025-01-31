@@ -180,14 +180,29 @@
             <h1>الثانوية التأهيلية عمر المختار</h1>
             <nav>
                 <ul>
-                    <li><a href="#home">الرئيسية</a></li>
-                    <li><a href="#about">عن الموقع</a></li>
-                    <li><a href="#subjects">المواد</a></li>
-                    <li><a href="#quiz">الاختبار</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                  <li><a href="#home" onclick="closeMenu()">الرئيسية</a></li>
+    <li><a href="#about" onclick="closeMenu()">عن الموقع</a></li>
+    <li><a href="#subjects" onclick="closeMenu()">المواد</a></li>
+    <li><a href="#quiz" onclick="closeMenu()">الاختبار</a></li>
+    <li><a href="https://web.facebook.com/profile.php?id=100064010625968" target="_blank" onclick="closeMenu()">📘 صفحتنا على فيسبوك</a></li>
+    <li><a href="https://www.youtube.com/@---sq6sd" target="_blank" onclick="closeMenu()">🎥 قناتنا على يوتيوب</a></li>
+<li><a href="https://www.youtube.com/@---sq6sd" target="_blank" onclick="closeMenu()">2BAK</a></li>
+</ul>
+</ul>
+
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("show");
+        }
+
+        function closeMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.remove("show");
+        }
+    </script>
 
     <section id="home" class="hero">
         <div class="container">
