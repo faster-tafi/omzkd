@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>متجر العروض</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  :root {
+                --primary-color: #4A90E2FF;
+                --light-primary-color: #50E3C2FF;
+                --dark-primary-color: #4A90E2FF;
+                --secondary-color: #1DCCA4FF;
+                --body-background-color: #EDFAF7FF;
+                --success-color: #3EB499FF;
+                --info-color: #008D6EFF;
+                --warning-color: #007A5FFF;
+                --danger-color: #4A4A4AFF;
+        }
+
+    .notice-bar {
+  position: relative;
+  background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+  background-size: 600% 600%;
+  color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(80, 227, 194);
+  animation: gradientAnimation 10s ease infinite;
+  padding: 10px 0;
+  overflow: hidden;
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.notice-bar::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: rgb(80, 227, 194);
+  border-radius: 50% 50% 0 0;
+  z-index: 1;
+  animation: rollEffect 2s ease-in-out infinite alternate;
+}
+@keyframes rollEffect {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+.notice-bar .container {
+  position: relative;
+  z-index: 2;
+}
+
+.notice-bar p {
+  text-align: center;
+  margin: 0;
+}
+
+.notice-bar span {
+  color: rgb(65, 65, 65);
+  font-family: sans-serif;
+  font-size: 14px;
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+  border-radius: 5px;
+}
+@media (max-width: 991px) {
+  .header-switcher {
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+    background-size: 600% 600%;
+    border-radius: 20%; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px; 
+    padding: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; 
+    cursor: pointer;
+    animation: gradientAnimation 10s ease infinite; 
+  }
+
+  .header-switcher:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  }
+
+  .header-switcher i {
+    font-size: 24px; 
+    color: #ffffff; 
+  }
+}
+@media (min-width: 992px) {
+  .header-switcher {
+    background-color: transparent; 
+    border-radius: 0; 
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto; 
+    padding: 0;
+    box-shadow: none; 
+    text-decoration: none; 
+  }
+
+  .header-switcher i {
+    font-size: 24px;
+    color: #000000; 
+  }
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+@media (max-width: 991px) {
+  .cart-icon {
+    background-color: #57edcc; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 40px; 
+    height: 40px; 
+    padding: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+
+  }
+
+  .cart-icon:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  }
+
+  .cart-icon i {
+    font-size: 24px;
+    color: #ffffff; 
+  }
+}
+  @media (max-width: 991px) {
+  .header-switcher {
+    background-color: #57edcc;
+    border-radius: 20%; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px; 
+    padding: 5px; 
+    border: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer; 
+  }
+
+  .header-switcher:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  }
+
+  .header-switcher i {
+    font-size: 24px;
+    color: #ffffff; 
+  }
+}
+
+.slide {
+    border-radius: 0 0 20px 20px; 
+    background-color: #fff; 
+    box-shadow: #fff; 
+    overflow: hidden;
+    position: relative; 
+    animation: zoom 20s infinite; 
+}
+
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+.mobile-image, .desktop-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hidden-desktop {
+    display: none; 
+}
+.app-heading {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.heading-primary {
+  background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+  background-size: 600% 600%;
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  position: relative;
+  animation: gradientMove 10s linear infinite;
+}
+
+.heading-description {
+  font-size: 1.2em;
+  color: #333;
+  position: relative;
+  padding-top: 10px;
+  animation: gradientMove 10s linear infinite, move 10s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.categories-list-section {
+  padding: 20px;
+}
+
+.heading-primary {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.heading-description {
+  font-size: 16px;   
+  color: #555;
+}
+
+.categories-style-1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+}
+
+.category-item {
+  flex: 1 1 calc(25% - 10px); 
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 10px; 
+  animation: zoomAnimation 10s infinite; 
+  border-radius: 20px; 
+  background-color: #fff; 
+}
+
+.category-item img {
+  width: 100%;
+  height: auto; 
+  display: block;
+  object-fit: cover; 
+}
+
+.category-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes zoomAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .category-item {
+    flex: 1 1 calc(50% - 10px); 
+  }
+}
+
+@media (max-width: 480px) {
+  .category-item {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
+
+.products-style-1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  justify-content: center; 
+  width: 100%;
+}
+
+.product-item {
+  flex: 1 1 calc(25% - 10px);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background-color: #eefcf9;
+  padding: 10px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  transition: background-color 0.3s ease; 
+
+}
+
+@keyframes border-bounce {
+  0% {
+    border: 3px solid #50e3c2;
+  }
+  50% {
+    border: 3px solid #28a091;
+  }
+  100% {
+    border: 3px solid #50e3c2; 
+  }
+}
+
+.product-thumbnail {
+  display: block;
+  overflow: hidden;
+  border-radius: 15px; 
+}
+
+.product-thumbnail img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px; 
+  object-fit: cover;
+}
+
+
+.product-details {
+  margin-top: 10px; 
+}
+
+.product-info {
+  text-align: center;
+}
+
+.product-title {
+  font-size: 18px; 
+  margin-bottom: 10px;
+  line-height: 1.4; 
+}
+
+.product-price {
+  font-size: 14px;
+  color: #333;
+}
+
+.currency-value {
+  font-weight: bold;
+}
+
+.currency-value.before {
+  text-decoration: line-through; 
+  color: #888;
+}
+
+
+.product-actions {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.button.small-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 5px; 
+}
+
+.button.secondary-button {
+  background-color: #007bff; 
+  color: #fff;
+  border: none;
+}
+
+.button.secondary-button:hover {
+  background-color: #0056b3; 
+}
+
+
+@media (max-width: 768px) {
+  .product-item {
+    flex: 1 1 calc(50% - 10px); 
+  }
+
+  .product-title {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .product-item {
+    flex: 1 1 calc(50% - 10px); 
+  }
+
+  .product-title {
+    font-size: 16px; 
+  }
+}
+
+@keyframes move-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px); 
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+.load-more {
+  text-align: center;
+  margin: 20px 0; 
+  animation: move-horizontal 4s ease-in-out infinite; 
+}
+
+.load-more .button {
+  background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+  color: #fff;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  font-size: 16px; 
+  font-weight: bold; 
+  display: inline-block; 
+  transition: background 0.3s ease, color 0.3s ease;
+   animation: gradientMove 10s linear infinite, move 10s linear infinite;
+}
+
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+  .footer {
+  position: relative;
+  background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+  background-size: 600% 600%;
+  color: rgb(255, 255, 255);
+  border-top: 1px solid rgb(80, 227, 194);
+  animation: gradientAnimation 10s ease infinite, fadeIn 2s ease-out;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: rgb(80, 227, 194);
+  border-radius: 0 0 50% 50%;
+  z-index: 1;
+
+}
+.footer-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
+}
+
+.footer-brand {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  display: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer-brand:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+
+<script type="1975fafbf14ca41258643fd9-text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var signatureDiv = document.createElement('div');
+    signatureDiv.className = 'faster tafi';
+   signatureDiv.innerHTML = '© 2024 حقوق الطبع والنشر - <a href="https://t.me/lalii7tikar" target="_blank">قناتنا على تيليجرام</a>';
+
+
+    // إضافة نمط CSS لتصغير حجم الكتابة
+    signatureDiv.style.fontSize = '12px';
+    signatureDiv.style.textAlign = 'center';
+    signatureDiv.style.color = '#555';  // لتغيير لون النص إذا أردت
+
+    document.body.appendChild(signatureDiv);
+
+    var additionalSignature = signatureDiv.cloneNode(true);
+  });
+</script>
+
+.product-slider .slick-slide img {
+    transition: transform 5s ease; 
+}
+
+.product-slider .slick-slide:hover img {
+    transform: scale(1.1); 
+}
+
+.checkout {
+    border: 5px solid #50e3c2; 
+    border-radius: 20px;
+    margin: 0 0 10px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25), 0px 0px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite; 
+}
+
+
+
+.checkout-heading {
+    animation: zoom 3s infinite linear;
+    text-align: center;
+    font-weight: bold !important;
+    font-size: 5rem;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 600% 600%; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    animation: gradientAnimation 10s ease infinite;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: none;
+}
+
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes zoom {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.checkout-form {
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.checkout-form:hover {
+    background-color: rgba(255, 255, 255, 0.9); 
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="url"],
+.checkout-form input[type="search"],
+.checkout-form input[type="number"],
+.checkout-form input[type="tel"],
+.checkout-form input[type="password"],
+.checkout-form textarea {
+    border-color: #50e3c2;
+    border-radius: 15px;
+    padding: 12px 18px;
+    background-color: #ffffff;
+    border: 2px solid;
+    transition: all 2s ease-in-out;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+    border-color: #28a091;
+    transform: scale(1.02);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.checkout-form input[type="text"],
+.checkout-form input[type="email"],
+.checkout-form input[type="url"],
+.checkout-form input[type="search"],
+.checkout-form input[type="number"],
+.checkout-form input[type="tel"],
+.checkout-form input[type="password"],
+.checkout-form textarea {
+    border-radius: 15px;
+    padding: 12px 18px;
+    background-color: #ffffff;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 600% 600%;
+    color: #ffffff; 
+    font-weight: bold; 
+    border: none; 
+    animation: gradientBorder 10s ease infinite; 
+    transition: all 2s ease-in-out;
+}
+
+.checkout-form input::placeholder,
+.checkout-form textarea::placeholder {
+    color: #FFFF; 
+    font-weight: bold; 
+}
+
+@keyframes gradientBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); /
+    background-size: 600% 600%;
+    color: #ffffff; 
+    font-weight: bold; 
+    transform: scale(1.02);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    animation: gradientBorder 10s ease infinite;
+
+    </style>
+    <style>
+  .button.single-submit {
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; 
+    color: white;
+    font-size: 16px; 
+    cursor: pointer; 
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.button.single-submit:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+    transform: translateY(-2px);
+}
+
+    </style>
+    <style>
+
+.product-section.single-visitors b {
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+    border-radius: 5px; 
+    padding: 2px 5px;
+    color: white; 
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+    </style>
+<style>
+
+.textual-buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+.textual-button {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 2px 5px; 
+    border: 2px solid transparent; 
+    color: black;
+    cursor: pointer; 
+}
+
+input[type="radio"]:checked + label {
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+    background-size: 600% 600%;
+    animation: gradientAnimation 10s ease infinite;
+    border-radius: 5px; /* Rounded corners for the border */
+    border: none; /* Remove border */
+    color: white; /* Text color inside the border when selected */
+}
+
+/* Gradient animation keyframes */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.textual-button input[type="radio"] {
+    display: none; /* Hide radio buttons */
+}
+
+.textual-button label {
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+
+</style>
+<style>
+.single-countdown {
+    display: flex;
+
+    padding: 10px;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091); 
+    background-size: 300% 300%;
+    animation: gradientAnimation 10s ease infinite;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    color: #ffffff; 
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+</style>
+<style>
+
+.sticky-cart-bar .single-submit {
+  position: relative;
+  background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+  background-size: 600% 600%;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sticky-cart-bar .single-submit:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+</style>
+<style>
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+}
+
+.product-actions {
+    margin-top: 10px; 
+    text-align: center; 
+}
+
+@media (max-width: 768px) {
+    .button {
+        padding: 6px 12px; 
+        font-size: 12px;
+    }
+}
+
+@keyframes gradientButton {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.product-actions .button {
+    position: relative;
+    background: linear-gradient(270deg, #50e3c2, #38c0a3, #28a091);
+    background-size: 600% 600%;
+    color: #fff;
+    border: none;
+    padding: 8px 16px; 
+    border-radius: 5px;
+    font-size: 14px; 
+    font-weight: bold;
+    cursor: pointer;
+    animation: gradientButton 10s ease-in-out infinite;
+    max-width: 100%; 
+    box-sizing: border-box; 
+}
+
+.product-actions .button:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+}</style>
+<style>
+
+.product-details {
+  direction: rtl; 
+}
+
+.product-section {
+  box-sizing: border-box;
+  width: 100%; 
+}
+
+.single-title {
+  width: 100%;
+  text-align: right; 
+}
+
+.thumbnail img {
+  width: 100%;
+  height: auto; 
+}
+
+
+.single-price {
+  width: 100%;
+  text-align:right; 
+}
+
+.countdown-section {
+  width: 100%;
+  text-align: center;
+}
+
+.single-progress {
+  width: 100%;
+  background-color: #f1f1f1; 
+}
+
+.single-countdown {
+  display: flex;
+  justify-content: space-between; 
+}
+
+
+.quantity {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.single-quantity {
+  width: 60px;
+  text-align: center; 
+}
+
+```.single-title {
+
+  text-align: right; 
+}
+
+</style>
+ <style>
+ .single-hurry-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    color: #000; 
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.single-hurry-section:hover {
+    background: #e2e6ea; 
+}
+
+.single-hurry {
+    position: relative;
+    z-index: 1;
+    animation: textGlow 1.5s infinite;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(255,255,255,1), 0 0 30px rgba(255,255,255,0.8);
+    }
+    100% {
+        text-shadow: 0 0 5px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.6);
+    }
+}
+</style>
+            <style type="text/css">
+    .section-2WmcXHUKXJQLYVPg {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+}
+  </style>
+  <style type="text/css">
+    .section-vCoNpXzrYrwSkWqV {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #ffffff;
+    color: #FFFFFFFF;
+}.section-vCoNpXzrYrwSkWqV .heading-primary {
+    color: #000000;
+}
+
+.section-vCoNpXzrYrwSkWqV .heading-description {
+    color: #50E3C2FF;
+}.section-vCoNpXzrYrwSkWqV .product-item .product-title a {
+    color: #000000;
+}
+
+.section-vCoNpXzrYrwSkWqV .product-item .product-price .before {
+    color: #747474;
+}
+
+.section-vCoNpXzrYrwSkWqV .product-item .product-price .after {
+    color: #50E3C2FF;
+}.section-vCoNpXzrYrwSkWqV .product-item,
+.section-vCoNpXzrYrwSkWqV .product-item .product-details {
+    border-color: #50E3C2FF;
+}
+
+.section-vCoNpXzrYrwSkWqV .product-item:hover,
+.section-vCoNpXzrYrwSkWqV .product-item:hover .product-details {
+    border-color: #50E3C2FF;
+}.section-vCoNpXzrYrwSkWqV .product-item .product-actions .button {
+    color: #50E3C2FF;
+    background-color: #50E3C2FF;
+    border-color: #50E3C2FF;
+}
+
+.section-vCoNpXzrYrwSkWqV .product-item .product-actions .button:hover {
+    color: #50E3C2FF;
+    background-color: #50E3C2FF;
+    border-color: #50E3C2FF;
+}.section-vCoNpXzrYrwSkWqV .load-more button,
+.section-vCoNpXzrYrwSkWqV .products-slider .slick-next,
+.section-vCoNpXzrYrwSkWqV .products-slider .slick-prev {
+    color: #FFFFFFFF;
+    background-color: #50E3C2FF;
+    border-color: #50E3C2FF;
+}
+
+.section-vCoNpXzrYrwSkWqV .load-more button:hover,
+.section-vCoNpXzrYrwSkWqV .products-slider .slick-next:hover,
+.section-vCoNpXzrYrwSkWqV .products-slider .slick-prev:hover {
+    color: #FFFFFFFF;
+    background-color: #50E3C2FF;
+    border-color: #50E3C2FF;
+}
+  </style>
+</head>
+<body>
+  <!-- شريط الإشعارات -->
+  <div class="notice-bar">
+    <div class="container">
+      <div class="notice-content">
+        <p>مرحباً بكم في متجر العروض - أفضل الأسعار والخصومات</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- قسم السلايدر -->
+  <section class="slider-section">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slide active">
+          <img src="https://i.postimg.cc/mkrX3qNf/8-CB5-F1-FF-5.png" alt="عرض متجر العروض" class="slider-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الهيدر المحسن -->
+<!-- الهيدر المحسن بحجم أصغر -->
+<header class="header" style="background: linear-gradient(to right, #50E3C2, #3BC1A4); padding: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+  <div class="container" style="text-align: center;">
+    <h1 style="
+      margin: 0;
+      font-size: 1.4rem;
+      color: #ffffff;
+      font-family: 'Cairo', sans-serif;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+      letter-spacing: 0.5px;
+    ">
+     🌟 تمتع ليا شهر كامل 🌟مع TAFI
+    </h1>
+  </div>
+</header>
+
+
+
+  <!-- القسم الرئيسي -->
+  <main id="home">
+    <!-- قسم العنوان الرئيسي -->
+    <section class="app-heading">
+      <h2 class="heading-primary">أحسن العروض المتوفرة</h2>
+      <p class="heading-description">ختار اشمن شريحة عندك وضغط عليها </p>
+    </section>
+
+    <!-- قسم الفئات -->
+    <section id="categories" class="categories-list-section">
+      <h2 class="heading-primary">شبكات لي كاينة حاليا</h2>
+      <div class="categories-style-1">
+        <div class="category-item" onclick="showCategory('inwi')">
+          <img src="https://i.postimg.cc/W3FFvyts/NBKt-AP7j-400x400.png" alt="انوي" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNTBlM2MyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPmFud2k8L3RleHQ+PC9zdmc+'">
+          <div class="category-title"> اضغط هنا عروض انوي</div>
+        </div>
+
+        <div class="category-item" onclick="showCategory('iam')">
+          <img src="https://i.postimg.cc/XJNzsTN7/download.jpg" alt="اتصالات المغرب" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzhjMGEzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPklBTTwvdGV4dD48L3N2Zz4='">
+          <div class="category-title"> اضغط هنا عروض اتصالات المغرب</div>
+        </div>
+
+        <div class="category-item" onclick="showCategory('win')">
+          <img src="https://i.postimg.cc/bY53cGNh/unnamed.webp" alt="وين باي انوي" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMjhhMDkxIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldJTjwvdGV4dD48L3N2Zz4='">
+          <div class="category-title"> اضغط هنا عروض وين باي انوي</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المنتجات الرئيسية -->
+    <section id="main-products" class="section-vCoNpXzrYrwSkWqV">
+      <h2 class="heading-primary">العروض لي حتا واحد متلقاهم عندوا😁</h2>
+      <div class="products-style-1">
+        <div class="product-item">
+          <div class="product-thumbnail">
+            <img src="https://i.postimg.cc/bY53cGNh/unnamed.webp" alt="عرض 1" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNTBlM2MyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPuุนุฑุถ 1PC90ZXh0Pjwvc3ZnPg=='">
+          </div>
+          <div class="product-details">
+            <div class="product-info">
+              <h3 class="product-title"><a href="#">اشتراك 45يوم  </a></h3>
+              <div class="product-price">
+                <span class="currency-value before">60 درهم</span>
+                <span class="currency-value after">20 درهم</span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <button class="button secondary-button small-button" onclick="buy('عرض مميز 1', '20 درهم')">
+                شراء الآن
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-item">
+          <div class="product-thumbnail">
+            <img src="https://i.postimg.cc/W3FFvyts/NBKt-AP7j-400x400.png" alt="عرض 2" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzhjMGEzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPุนุฑุถ 2PC90ZXh0Pjwvc3ZnPg=='">
+          </div>
+          <div class="product-details">
+            <div class="product-info">
+              <h3 class="product-title"><a href="#"> اشتراك 45 يوم انوي نجمة ستة</a></h3>
+              <div class="product-price">
+                <span class="currency-value before">40 درهم</span>
+                <span class="currency-value after">20 درهم</span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <button class="button secondary-button small-button" onclick="buy('عرض مميز 2', '35 درهم')">
+                شراء الآن
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم محتوى الفئات -->
+    <section id="category-content" class="hidden">
+      <!-- سيتم إدراج المحتوى هنا بواسطة JavaScript -->
+    </section>
+
+    <!-- قسم الدفع -->
+    <section id="checkout" class="checkout hidden">
+      <div class="container">
+        <div class="checkout-form">
+          <div class="order-summary">
+            <h3>ملخص الطلب</h3>
+            <div id="selected-offer" class="selected-product">
+              <div class="product-image">
+                <img id="selected-product-image" src="" alt="المنتج المحدد">
+              </div>
+              <div class="product-info">
+                <span class="product-label">الاشتراك لي حددتي هوا هدا :</span>
+                <span class="product-name"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-methods">
+            <h3>طريقة الدفع</h3>
+            <div class="payment-option">
+              <div class="payment-header">
+                <img src="https://i.postimg.cc/wM57QqH3/channels4-profile.jpg" alt="Cash Plus" class="payment-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmZjY5MDAiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q2FzaCBQbHVzPC90ZXh0Pjwvc3ZnPg=='">
+                <span class="payment-title">الدفع عبر Cash Plus</span>
+              </div>
+              
+              <div class="payment-choices">
+                <div class="choice-item">
+                  <input type="radio" id="cash-account" name="payment-method" value="cash-account" checked>
+                  <label for="cash-account">
+                    <i>💳</i>
+                    الدفع من حساب Cash Plus
+                  </label>
+                </div>
+                
+                <div class="choice-item">
+                  <input type="radio" id="cash-agency" name="payment-method" value="cash-agency">
+                  <label for="cash-agency">
+                    <i>🏪</i>
+                    الدفع من وكالة Cash Plus
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="customer-info">
+            <h3>بيانات العميل</h3>
+            <div class="form-group">
+              <label for="buyer-name">الاسم الكامل <span class="required">*</span></label>
+              <input type="text" id="buyer-name" placeholder="أدخل اسمك الكامل" required>
+            </div>
+
+            <div class="form-group">
+              <label for="buyer-phone">رقم الهاتف</label>
+              <input type="tel" id="buyer-phone" placeholder="رقم الهاتف (اختياري)">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="button primary-submit" onclick="submitOrder()">
+              <i class="whatsapp-icon">📱</i>
+              إتمام الطلب عبر واتساب
+            </button>
+            <button class="button secondary-button" onclick="goBack()">
+              العودة للمنتجات
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>متجر العروض احسن العروض بأقل اثمنة</h3>
+        <p>أفضل العروض والخصومات الحصرية</p>
+        <div class="telegram-footer-link">
+          <a href="https://t.me/lalii7tikar" target="_blank" class="telegram-btn">
+            <i>📱</i>
+            انضم إلى قناة التلغرام
+          </a>
+        </div>
+        <p>© 2025 تم انشاء هدا المتجر من قبل TAFI</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showCategory(category) {
+      document.getElementById('categories').classList.add('hidden');
+      document.getElementById('main-products').classList.add('hidden');
+      document.getElementById('category-content').classList.remove('hidden');
+      document.getElementById('category-content').innerHTML = `
+        <h2 style="text-align:center">${category}</h2>
+        <div class="products">
+          <div class="product">
+            <img src="${category}_1.jpg" alt="${category} 1">
+            <h3>${category} عرض 1</h3>
+            <div class="old-price">25 درهم</div>
+            <div class="price">15 درهم</div>
+            <button onclick="buy('${category} عرض 1', '15 درهم')">يشتري</button>
+          </div>
+        </div>`;
+
+      history.pushState({page: 'category'}, '', '#category');
+    }
+
+    window.onpopstate = function () {
+      document.getElementById('categories').classList.remove('hidden');
+      document.getElementById('main-products').classList.remove('hidden');
+      document.getElementById('category-content').classList.add('hidden');
+      document.getElementById('checkout').classList.add('hidden');
+    };
+
+    function buy(productName, price) {
+      selectedProduct = `${productName} - ${price}`;
+      document.getElementById('category-content').classList.add('hidden');
+      document.getElementById('main-products').classList.add('hidden');
+      document.getElementById('categories').classList.add('hidden');
+      document.getElementById('checkout').classList.remove('hidden');
+      document.getElementById('selected-offer').textContent = `المنتج: ${selectedProduct}`;
+    }
+
+    function submitOrder() {
+      const name = document.getElementById('buyer-name').value.trim();
+      if (!name) return alert("المرجو إدخال اسمك");
+      const message = `مرحبا، أريد شراء: ${selectedProduct}، الاسم: ${name}`;
+      const encoded = encodeURIComponent(message);
+      window.location.href = `https://wa.me/212785207415?text=${encoded}`;
+    }
+    function goBack() {
+        window.history.back();
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
