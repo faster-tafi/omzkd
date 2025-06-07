@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأكيد الطلب - TAFIVPS/REDA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Base Styles for the checkout page */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles (as per your original style.css or general design) */
+        .header {
+            background: #0A2239; /* Dark blue background */
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand h1 {
+            margin: 0;
+        }
+
+        .site-logo {
+            text-decoration: none;
+            color: inherit;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            padding: 120px 0 80px; /* Adjust padding-top to account for fixed header */
+            background: #f8f9fa;
+        }
+
+        .order-flow-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white; /* Add white background for the main content block */
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #0A2239;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 20px; /* Space between steps */
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .step.active {
+            color: #0A2239; /* Darker color for active step */
+            font-weight: 600;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: #ccc; /* Default inactive */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-left: 10px; /* RTL spacing */
+            transition: background 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background: #00BCD4; /* Active color */
+        }
+
+        /* Section Styling (Customer Info, Order Summary, Payment Methods) */
+        .order-section {
+            background: white;
+            border-radius: 20px; /* Inherited from .order-flow-wrapper if nested */
+            padding: 0; /* Remove padding if inner content has its own */
+            box-shadow: none; /* Remove shadow if inner content has its own */
+            margin-bottom: 2rem;
+        }
+
+        .section-heading {
+            margin-bottom: 1.5rem;
+            color: #0A2239;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0A2239;
+        }
+
+        .required {
+            color: #e74c3c; /* Red for required fields */
+            margin-right: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #00BCD4;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2);
+        }
+
+        /* Order Summary Specifics */
+        .order-summary {
+            background: #f8f9fa;
+            border: 1px dashed #e0e0e0; /* Add a subtle border */
+            padding: 1.5rem; /* Specific padding for summary */
+            border-radius: 15px;
+        }
+
+        .order-summary p {
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #0A2239;
+        }
+
+        /* Payment Methods Section (using fieldset) */
+        .payment-methods-section {
+            padding: 0; /* No extra padding for this section wrapper */
+        }
+        .payment-methods-group {
+            border: none; /* Remove default fieldset border */
+            padding: 0;
+            margin: 0;
+        }
+        .payment-methods-group legend {
+            /* Style the legend as the section heading */
+            font-size: 1.8rem;
+            color: #0A2239;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding: 0 10px;
+            text-align: right;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Individual Payment Option Card */
+        .payment-option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+            position: relative;
+            /* overflow: hidden; /* Removed for now, will manage with max-height in JS */
+        }
+
+        .payment-option-card:hover {
+            border-color: #00BCD4; /* Sky Blue Accent */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .payment-option-card.selected {
+            border-color: #00BCD4;
+            background: rgba(0,188,212,0.05); /* Light blue background when selected */
+            box-shadow: 0 6px 18px rgba(0, 188, 212, 0.15);
+        }
+
+        /* Main Label for Payment Method (Cash Plus, Bank Transfer) */
+        .payment-main-label {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333333;
+            cursor: pointer;
+            /* padding-bottom: 10px; /* This can be removed or handled by margin-bottom on container */
+        }
+
+        .payment-main-label input[type="radio"] {
+            margin-left: 15px;
+            transform: scale(1.3);
+            accent-color: #00BCD4; /* Accent color for radio button */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .payment-main-label input[type="radio"]:checked {
+            border-color: #00BCD4;
+            background-color: #00BCD4;
+        }
+
+        .payment-main-label input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .payment-icon {
+            font-size: 1.8rem;
+            margin-left: 15px; /* Spacing for RTL */
+        }
+        .cashplus-icon { color: #ff9800; }
+        .bank-icon { color: #2196f3; }
+
+        /* Sub-options Container (initially hidden, controlled by JS max-height) */
+        .payment-sub-options-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            border-top: 1px dashed #e0e0e0; /* Separator for sub-options */
+            padding-top: 0; /* Initial padding top 0, will be 15px when 'show' */
+            padding-bottom: 0; /* Initial padding bottom 0, will be 15px when 'show' */
+            margin-top: 15px;
+        }
+        .payment-sub-options-container.show-sub-options { /* Class added by JS to reveal */
+            max-height: 500px; /* A large enough value to show all sub-options */
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+
+        /* Sub-option Item */
+        .sub-option-item {
+            background-color: #f0f8ff; /* Light blue background for sub-options */
+            border: 1px solid #cceeff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px; /* Space between sub-option items */
+            transition: all 0.3s ease;
+        }
+        .sub-option-item:last-child {
+            margin-bottom: 0; /* No margin for the last item */
+        }
+        .sub-option-item:hover {
+            background-color: #e6f7ff;
+            border-color: #aaddff;
+        }
+        .sub-option-item.active {
+            border-color: #0A2239; /* Dark blue when active */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .method-select-label {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: #555555;
+            cursor: pointer;
+            margin-bottom: 10px; /* Space between label and description/details */
+            font-size: 1.05rem;
+        }
+        .method-select-label input[type="radio"] {
+            margin-left: 10px;
+            accent-color: #0A2239; /* Dark Blue */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .method-select-label input[type="radio"]:checked {
+            border-color: #0A2239;
+            background-color: #0A2239;
+        }
+
+        .method-select-label input[type="radio"]:checked::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .method-icon {
+            font-size: 1.3rem;
+            margin-left: 10px; /* Spacing for RTL */
+            color: #0A2239; /* Dark Blue */
+        }
+
+        /* Method Description */
+        .method-description p {
+            font-size: 0.95rem;
+            color: #666666;
+            margin-top: 5px;
+            line-height: 1.6;
+            padding-right: 35px; /* Align with method icon */
+        }
+
+        /* Payment Info Details (initially hidden, controlled by JS max-height) */
+        .payment-info-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Add padding to transition */
+            background-color: #e8f5e8; /* Light green background */
+            border-top: 1px dashed #a5d6a7; /* Greenish border */
+            padding-top: 0; /* Initial padding top 0, will be 15px when 'show' */
+            padding-bottom: 0;
+            padding-left: 15px; /* Always have padding left/right */
+            padding-right: 15px;
+            margin-top: 15px;
+            border-radius: 0 0 10px 10px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        .payment-info-details.show { /* This class would be added by JS */
+            max-height: 500px; /* Sufficient height to reveal content */
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 2px solid #4caf50; /* Stronger border when active */
+            border-top: none;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #2e7d32; /* Dark green for info header */
+        }
+        .info-header h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+            margin-left: 10px; /* Spacing for RTL */
+        }
+        .info-icon {
+            font-size: 1.3rem;
+            color: #4caf50; /* Green for info icon */
+        }
+
+        .info-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info-steps li {
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.95rem;
+            color: #555555;
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 6px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .info-steps li:last-child {
+            margin-bottom: 0; /* No margin for the last step */
+        }
+        .info-steps li:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateX(-3px);
+        }
+        .step-icon {
+            color: #28a745; /* Green for checkmark */
+            margin-left: 10px; /* Spacing for RTL */
+            font-size: 1rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            width: 100%;
+            background: linear-gradient(45deg, #25D366, #20b358);
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 6px 15px rgba(37,211,102,0.2);
+            margin-top: 2rem; /* Add margin to separate from payment methods */
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+        }
+
+        .whatsapp-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.7;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .order-flow-wrapper {
+                padding: 1rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .section-heading {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .payment-option-card, .sub-option-item {
+                padding: 15px;
+            }
+            .payment-main-label {
+                font-size: 1.1rem;
+            }
+            .payment-icon {
+                font-size: 1.5rem;
+            }
+            .whatsapp-button {
+                font-size: 1rem;
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .step-indicator {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .step {
+                width: 48%; /* Allow steps to wrap on smaller screens */
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1><a href="index.html" class="site-logo">TAFIVPS/REDA</a></h1>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="order-flow-wrapper">
+                <div class="step-indicator">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <span>معلومات العميل</span>
+                    </div>
+                    <div class="step active"> <div class="step-number">2</div>
+                        <span>تأكيد الطلب</span>
+                    </div>
+                </div>
+
+                <h1 class="page-title">تأكيد طلب خدمة VPS</h1>
+
+                <section class="order-section customer-info-form">
+                    <h2 class="section-heading">معلومات العميل</h2>
+                    <form id="orderForm">
+                        <div class="form-group">
+                            <label for="fullName">الاسم الكامل <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required aria-required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whatsapp">رقم الواتساب <span class="required">*</span></label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="مثال: 212785207415" required aria-required="true">
+                        </div>
+                    </form>
+                </section>
+
+                <section class="order-section order-summary">
+                    <h3 class="section-heading">ملخص الطلب</h3>
+                    <div id="orderDetails">
+                        <p><strong>الخطة المختارة:</strong> <span id="planName" class="summary-value">-</span></p>
+                        <p><strong>العرض:</strong> <span id="offerName" class="summary-value">-</span></p>
+                        <p><strong>السعر الإجمالي:</strong> <span id="totalPrice" class="summary-value">-</span> درهم شهرياً</p>
+                    </div>
+                </section>
+
+                <section class="order-section payment-methods-section">
+                    <fieldset class="payment-methods-group">
+                        <legend class="section-heading">اختيار وسيلة الدفع</legend>
+
+                        <div class="payment-option-card" id="cashPlusOption">
+                            <label class="payment-main-label">
+                                <input type="radio" name="paymentMethod" value="cashplus" id="radioCashPlus">
+                                <i class="fas fa-money-bill-wave payment-icon cashplus-icon"></i>
+                                <strong>كاش بلوس (Cash Plus)</strong>
+                            </label>
+
+                            <div class="payment-sub-options-container" id="cashPlusSubOptions" aria-hidden="true">
+                                <div class="sub-option-item">
+                                    <label class="method-select-label">
+                                        <input type="radio" name="cashPlusMethod" value="agency" id="agencyMethod">
+                                        <i class="fas fa-store method-icon"></i>
+                                        <span>إرسال المال عبر الوكالة</span>
+                                    </label>
+                                    <div class="method-description">
+                                        <p>اذهب إلى أقرب وكالة كاش بلوس وأرسل المبلغ المطلوب.</p>
+                                    </div>
+                                    <div class="payment-info-details" id="agencyInfo" aria-hidden="true">
+                                        <div class="info-header">
+                                            <i class="fas fa-info-circle info-icon"></i>
+                                            <h4>خطوات الإرسال عبر الوكالة:</h4>
+                                        </div>
+                                        <ul class="info-steps">
+                                            <li><i class="fas fa-check-circle step-icon"></i> بعد تأكيد الطلب، ستحصل على رقم المستفيد</li>
+                                            <li><i class="fas fa-check-circle step-icon"></i> اذهب إلى أقرب وكالة كاش بلوس</li>
+                                            <li><i class="fas fa fa-id-card step-icon"></i> ستحتاج إلى بطاقة تعريفك الوطنية (CIN)</li>
+                                            <li><i class="fas fa-money-bill-wave step-icon"></i> قم بدفع المبلغ المحدد</li>
+                                            <li><i class="fas fa-check-circle step-icon"></i> أرسل صورة الإيصال عبر الواتساب</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="sub-option-item">
+                                    <label class="method-select-label">
+                                        <input type="radio" name="cashPlusMethod" value="transfer" id="transferMethod">
+                                        <i class="fas fa-mobile-alt method-icon"></i>
+                                        <span>تحويل من تطبيق كاش بلوس</span>
+                                    </label>
+                                    <div class="method-description">
+                                        <p>استخدم تطبيق كاش بلوس على هاتفك لإجراء التحويل.</p>
+                                    </div>
+                                    <div class="payment-info-details" id="transferInfo" aria-hidden="true">
+                                        <div class="info-header">
+                                            <i class="fas fa-mobile-alt info-icon"></i>
+                                            <h4>خطوات التحويل عبر التطبيق:</h4>
+                                        </div>
+                                        <ul class="info-steps">
+                                            <li><i class="fas fa-check-circle step-icon"></i> افتح تطبيق كاش بلوس</li>
+                                            <li><i class="fas fa-hand-point-up step-icon"></i> اختر "تحويل المال" أو "إرسال أموال"</li>
+                                            <li><i class="fas fa-id-card step-icon"></i> أدخل رقم المستفيد الذي ستحصل عليه بعد تأكيد الطلب</li>
+                                            <li><i class="fas fa-money-bill-wave step-icon"></i> أدخل المبلغ المطلوب وأكمل التحويل</li>
+                                            <li><i class="fas fa-check-circle step-icon"></i> أرسل لقطة شاشة للتحويل المكتمل عبر الواتساب</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="payment-option-card" id="bankTransferOption">
+                            <label class="payment-main-label">
+                                <input type="radio" name="paymentMethod" value="bank" id="radioBankTransfer">
+                                <i class="fas fa-university payment-icon bank-icon"></i>
+                                <strong>تحويل بنكي (من حساب لحساب)</strong>
+                            </label>
+
+                            <div class="payment-info-details" id="bankInfo" aria-hidden="true">
+                                <div class="info-header">
+                                    <i class="fas fa-university info-icon"></i>
+                                    <h4>خطوات التحويل البنكي:</h4>
+                                </div>
+                                <ul class="info-steps">
+                                    <li><i class="fas fa-check-circle step-icon"></i> بعد تأكيد الطلب، ستحصل على معلومات الحساب البنكي (RIB)</li>
+                                    <li><i class="fas fa-university step-icon"></i> اذهب إلى البنك الخاص بك أو استخدم التطبيق البنكي/الصراف الآلي</li>
+                                    <li><i class="fas fa-exchange-alt step-icon"></i> أجري التحويل باستخدام RIB المقدم</li>
+                                    <li><i class="fas fa-check-circle step-icon"></i> أرسل صورة إيصال التحويل عبر الواتساب</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </fieldset>
+                </section>
+
+                <button class="whatsapp-button" id="confirmOrderBtn" disabled>
+                    <i class="fab fa-whatsapp"></i>
+                    تأكيد الطلب والدفع عبر الواتساب
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. DOM Elements (Caching references for better performance)
+            const planNameSpan = document.getElementById('planName');
+            const offerNameSpan = document.getElementById('offerName');
+            const totalPriceSpan = document.getElementById('totalPrice');
+
+            const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+            const cashPlusOptionCard = document.getElementById('cashPlusOption');
+            const bankTransferOptionCard = document.getElementById('bankTransferOption');
+            const cashPlusSubOptionsContainer = document.getElementById('cashPlusSubOptions');
+
+            const cashPlusMethodRadios = document.querySelectorAll('input[name="cashPlusMethod"]');
+            const agencyInfo = document.getElementById('agencyInfo');
+            const transferInfo = document.getElementById('transferInfo');
+            const bankInfo = document.getElementById('bankInfo');
+
+            const fullNameInput = document.getElementById('fullName');
+            const whatsappInput = document.getElementById('whatsapp');
+            const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+
+            // 2. Load Order Details from LocalStorage
+            function loadOrderDetails() {
+                const planName = localStorage.getItem('selectedPlan') || 'غير محدد';
+                const planPrice = localStorage.getItem('selectedPrice') || '0';
+                const offerName = localStorage.getItem('selectedOffer') || 'عرض عام';
+
+                planNameSpan.textContent = planName;
+                offerNameSpan.textContent = offerName;
+                totalPriceSpan.textContent = planPrice;
+            }
+
+            // 3. UI Logic for Payment Options
+            function hideAllPaymentInfo() {
+                // Hide all detailed info sections
+                agencyInfo.classList.remove('show');
+                transferInfo.classList.remove('show');
+                bankInfo.classList.remove('show');
+                agencyInfo.setAttribute('aria-hidden', 'true');
+                transferInfo.setAttribute('aria-hidden', 'true');
+                bankInfo.setAttribute('aria-hidden', 'true');
+
+                // Hide sub-options container for Cash Plus with transition
+                cashPlusSubOptionsContainer.style.maxHeight = '0';
+                cashPlusSubOptionsContainer.classList.remove('show-sub-options'); // Remove class for padding transition
+                cashPlusSubOptionsContainer.setAttribute('aria-hidden', 'true');
+
+                // Remove 'selected' and 'active' classes from all cards/sub-items
+                document.querySelectorAll('.payment-option-card').forEach(card => card.classList.remove('selected'));
+                document.querySelectorAll('.sub-option-item').forEach(item => item.classList.remove('active'));
+            }
+
+            function handleMainPaymentMethodChange() {
+                hideAllPaymentInfo(); // Reset all visibility
+
+                const selectedMainMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                if (!selectedMainMethod) {
+                    confirmOrderBtn.disabled = true; // Disable if no main method is selected
+                    return;
+                }
+
+                selectedMainMethod.closest('.payment-option-card').classList.add('selected');
+
+                if (selectedMainMethod.value === 'cashplus') {
+                    // Add class to reveal sub-options container
+                    cashPlusSubOptionsContainer.classList.add('show-sub-options');
+                    // Set maxHeight dynamically based on content height for smooth transition
+                    cashPlusSubOptionsContainer.style.maxHeight = cashPlusSubOptionsContainer.scrollHeight + 'px';
+                    cashPlusSubOptionsContainer.setAttribute('aria-hidden', 'false');
+
+                    // If a Cash Plus sub-option was already selected, show its info
+                    const selectedCashPlusSub = document.querySelector('input[name="cashPlusMethod"]:checked');
+                    if (selectedCashPlusSub) {
+                        if (selectedCashPlusSub.value === 'agency') {
+                            agencyInfo.classList.add('show');
+                            agencyInfo.setAttribute('aria-hidden', 'false');
+                            document.getElementById('agencyMethod').closest('.sub-option-item').classList.add('active');
+                        } else if (selectedCashPlusSub.value === 'transfer') {
+                            transferInfo.classList.add('show');
+                            transferInfo.setAttribute('aria-hidden', 'false');
+                            document.getElementById('transferMethod').closest('.sub-option-item').classList.add('active');
+                        }
+                    } else {
+                        // If cashplus is selected but no sub-method, disable button
+                        confirmOrderBtn.disabled = true;
+                    }
+                } else if (selectedMainMethod.value === 'bank') {
+                    bankInfo.classList.add('show'); // Show bank info
+                    bankInfo.setAttribute('aria-hidden', 'false');
+                    // Uncheck Cash Plus sub-options if Bank Transfer is selected
+                    cashPlusMethodRadios.forEach(radio => radio.checked = false);
+                }
+                checkFormValidity();
+            }
+
+            function handleCashPlusSubMethodChange() {
+                // Hide only Cash Plus sub-info sections
+                agencyInfo.classList.remove('show');
+                transferInfo.classList.remove('show');
+                agencyInfo.setAttribute('aria-hidden', 'true');
+                transferInfo.setAttribute('aria-hidden', 'true');
+                document.querySelectorAll('.sub-option-item').forEach(item => item.classList.remove('active'));
+
+                const selectedSubMethod = document.querySelector('input[name="cashPlusMethod"]:checked');
+                if (selectedSubMethod) {
+                    if (selectedSubMethod.value === 'agency') {
+                        agencyInfo.classList.add('show');
+                        agencyInfo.setAttribute('aria-hidden', 'false');
+                        selectedSubMethod.closest('.sub-option-item').classList.add('active');
+                    } else if (selectedSubMethod.value === 'transfer') {
+                        transferInfo.classList.add('show');
+                        transferInfo.setAttribute('aria-hidden', 'false');
+                        selectedSubMethod.closest('.sub-option-item').classList.add('active');
+                    }
+                }
+                checkFormValidity();
+            }
+
+            // 4. Form Validation Logic
+            function checkFormValidity() {
+                const isNameValid = fullNameInput.value.trim() !== '';
+                const isWhatsappValid = whatsappInput.value.trim() !== ''; // You might want a regex here for better validation
+                const selectedMainPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+                let isPaymentMethodValid = false;
+                if (selectedMainPaymentMethod) {
+                    if (selectedMainPaymentMethod.value === 'cashplus') {
+                        isPaymentMethodValid = document.querySelector('input[name="cashPlusMethod"]:checked') !== null;
+                    } else if (selectedMainPaymentMethod.value === 'bank') {
+                        isPaymentMethodValid = true; // Bank transfer doesn't have sub-options
+                    }
+                }
+
+                confirmOrderBtn.disabled = !(isNameValid && isWhatsappValid && isPaymentMethodValid);
+            }
+
+            // 5. WhatsApp Message Generation
+            function generateWhatsAppMessage() {
+                const name = fullNameInput.value.trim();
+                const whatsappNumber = whatsappInput.value.trim(); // Ensure this is just the number for storing
+                const planName = planNameSpan.textContent;
+                const planPrice = totalPriceSpan.textContent;
+                const offerName = offerNameSpan.textContent;
+
+                const selectedMainPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                let paymentText = 'لم يتم تحديد وسيلة دفع';
+
+                if (selectedMainPaymentMethod) {
+                    if (selectedMainPaymentMethod.value === 'cashplus') {
+                        const subMethod = document.querySelector('input[name="cashPlusMethod"]:checked');
+                        if (subMethod) {
+                            paymentText = (subMethod.value === 'agency') ? 'كاش بلوس - إرسال عبر الوكالة' : 'كاش بلوس - تحويل من تطبيق كاش بلوس';
+                        }
+                    } else if (selectedMainPaymentMethod.value === 'bank') {
+                        paymentText = 'تحويل بنكي';
+                    }
+                }
+
+                // Using %0A for new line in WhatsApp message
+                const message = `مرحبا TAFIVPS/REDA،%0A%0Aأود تأكيد طلبي لخدمة VPS.%0Aالاسم: ${name}%0Aرقم الواتساب: ${whatsappNumber}%0Aالخطة المختارة: ${planName}%0Aالسعر الإجمالي: ${planPrice} درهم شهرياً%0Aوسيلة الدفع المختارة: ${paymentText}%0A%0Aيرجى تزويدي بالخطوات التالية لإتمام عملية الدفع وتفعيل الخدمة.%0Aشكرا لكم.`;
+
+                // Define the WhatsApp number for your business
+                const businessWhatsappNumber = '212785207415'; // Replace with your actual number
+                const whatsappURL = `https://wa.me/${businessWhatsappNumber}?text=${message}`;
+                window.open(whatsappURL, '_blank');
+            }
+
+            // 6. Event Listeners (Centralized)
+            paymentMethodRadios.forEach(radio => {
+                radio.addEventListener('change', handleMainPaymentMethodChange);
+            });
+
+            cashPlusMethodRadios.forEach(radio => {
+                radio.addEventListener('change', handleCashPlusSubMethodChange);
+            });
+
+            // Make the entire card selectable by clicking anywhere on it
+            cashPlusOptionCard.addEventListener('click', () => {
+                document.getElementById('radioCashPlus').checked = true;
+                handleMainPaymentMethodChange();
+            });
+            bankTransferOptionCard.addEventListener('click', () => {
+                document.getElementById('radioBankTransfer').checked = true;
+                handleMainPaymentMethodChange();
+            });
+
+            // Make sub-option items selectable by clicking anywhere on them
+            document.querySelectorAll('.sub-option-item').forEach(item => {
+                item.addEventListener('click', (event) => {
+                    // Prevent propagation if the click is on the radio button itself
+                    if (event.target.type !== 'radio') {
+                        const radio = item.querySelector('input[type="radio"]');
+                        if (radio) {
+                            radio.checked = true;
+                            handleCashPlusSubMethodChange();
+                        }
+                    }
+                });
+            });
+
+
+            fullNameInput.addEventListener('input', checkFormValidity);
+            whatsappInput.addEventListener('input', checkFormValidity);
+
+            confirmOrderBtn.addEventListener('click', generateWhatsAppMessage);
+
+            // Initial setup when page loads
+            loadOrderDetails();
+            hideAllPaymentInfo(); // Ensure all info is hidden on load
+            checkFormValidity(); // Set initial button state
+        });
+    </script>
+</body>
+</html>
