@@ -65,7 +65,7 @@ document.querySelectorAll('.plan-button').forEach(button => {
         localStorage.setItem('selectedPrice', planPrice);
         localStorage.setItem('selectedOffer', 'عرض عام');
         
-        window.location.href = 'order.html';
+        window.location.href = 'index4.html';
     });
 });
 
@@ -75,12 +75,13 @@ document.querySelectorAll('.offer-button').forEach(button => {
         const offerCard = this.closest('.offer-card');
         const offerTitle = offerCard.querySelector('h3').textContent;
         
+        // Redirect to appropriate offer page
         if (offerTitle.includes('Inwi 6') && !offerTitle.includes('WIN')) {
-            window.location.href = 'offers-inwi.html';
+            window.location.href = 'index1.html';
         } else if (offerTitle.includes('WIN BY INWI') || offerTitle.includes('WIN 0DH')) {
-            window.location.href = 'offers-win by inwi.html';
+            window.location.href = 'index3.html';
         } else if (offerTitle.includes('Maroc Telecom')) {
-            window.location.href = 'offers-maroc-telecom.html';
+            window.location.href = 'index2.html';
         }
     });
 });
@@ -145,9 +146,9 @@ function createMobileMenu() {
     offersLink.innerHTML = `
         <a href="#offers">العروض <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
-            <li><a href="offers-inwi.html">عروض Inwi 6 الحصرية</a></li>
-            <li><a href="offers-maroc-telecom.html">عروض Maroc Telecom 6 المميزة</a></li>
-            <li><a href="offers-win by inwi.html">عروض WIN BY INWI 0DH</a></li>
+            <li><a href="index1.html">عروض Inwi 6 الحصرية</a></li>
+            <li><a href="index2.html">عروض Maroc Telecom 6 المميزة</a></li>
+            <li><a href="index3.html">عروض WIN BY INWI 0DH</a></li>
         </ul>
     `;
     
